@@ -80,6 +80,90 @@ class LinkedList{
         current.next=null;
     }
 
+    contains(value){//Number eight solution
+        let current=this.head;
+        let itContains=false;
+        if(current.value===value)return true;
+        if(current===null)return false;
+        while(current.next!=null){
+            if(current.next.value===value){
+                itContains=true;
+                break;
+            }
+            current=current.next;
+        }
+        return itContains;
+    }
+
+    find(value){//Number nine solution
+        let count=1;
+        let current=this.head;
+        if(current===null)return null;
+        if(current.value===value)return 0;
+        while(current.next!=null){
+            if(current.next.value===value){
+                return count;
+            }
+            count+=1;
+            current=current.next
+        }
+        return null;
+    }
+
+    toString(){//Number ten solution
+        let myString='';
+        let current=this.head;
+        if(current!==null&&current.next===null)myArray.push(current.value);
+        if(current===null)return null;
+        while(current.next!==null){
+            myString+=`(${current.value})->`
+            current=current.next;
+            if(current.next===null)myString+=`(${current.value})->null`;
+        }
+        return myString;  
+    }
+
+    insertAt(value,index){//solution for extra credit number 1
+        let newNode=new Node(value);
+        let count=0;   
+        let current=this.head; 
+        while(count<=index&&current!==null){
+            if(index===0){
+                this.prepend(value);
+                break;
+            }
+            else if(count+1===index){
+                newNode.next=current.next;
+                current.next=newNode;
+                break;
+            }
+            current=current.next;
+            count+=1;
+        }
+        return this.toString();
+    }
+
+    removeAt(index){//solution for extra credit number 2
+        let count=0;
+        let current=this.head;
+        let size=this.size();
+        if(index===0){
+            this.head=this.head.next;
+            return this.toString();
+        }
+        while(count<index&&current!==null&&index<size){           
+            if(count+1===index){
+                let nextNode=current.next.next;
+                current.next=null;
+                current.next=nextNode;
+                break;
+            }
+            current=current.next;
+            count+=1;
+        }
+        return this.toString();
+    }
+
     printLinkedList(){
         let current=this.head;
         while(current!==null){
@@ -94,15 +178,21 @@ myLinkedList.append('H');
 myLinkedList.append('E');
 myLinkedList.append('A');
 myLinkedList.append('D');
-myLinkedList.printLinkedList();
-console.log(`The size of linked list is ${myLinkedList.size()}`);
-console.log('Head Node is');
-console.log(myLinkedList.headNode());
-console.log('Tail Node is');
-console.log(myLinkedList.tailNode());
-console.log('The Node at index 2 is');
-console.log(myLinkedList.atIndex(2));
-console.log('My linked list after Pop');
-myLinkedList.pop();
-myLinkedList.printLinkedList();
+// myLinkedList.printLinkedList();
+// console.log(`The size of linked list is ${myLinkedList.size()}`);
+// console.log('Head Node is');
+// console.log(myLinkedList.headNode());
+// console.log('Tail Node is');
+// console.log(myLinkedList.tailNode());
+// console.log('The Node at index 2 is');
+// console.log(myLinkedList.atIndex(2));
+// console.log('My linked list after Pop');
+// myLinkedList.pop();
+// myLinkedList.printLinkedList();
+// console.log(myLinkedList.contains('D'));
+//console.log(myLinkedList.find('D'));
+console.log(myLinkedList.toString());
+// console.log(myLinkedList.insertAt('M',0));
+// console.log(myLinkedList.removeAt(2));
+
 
